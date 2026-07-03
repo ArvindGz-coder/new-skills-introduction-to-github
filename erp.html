@@ -1,0 +1,238 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>JECRC ERP — Frontend (HTML + CSS)</title>
+  <style>
+    /* ===== Reset & base ===== */
+    *{box-sizing:border-box}
+    html,body{height:100%;margin:0;font-family:Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial; color:#111}
+    a{color:inherit;text-decoration:none}
+    button{font:inherit}
+
+    /* ===== Layout ===== */
+    .app{display:flex;min-height:100vh;background:#f5f7fb}
+    .sidebar{width:260px;background:#fff;border-right:1px solid #e6e9ef;padding:20px;display:flex;flex-direction:column;gap:18px}
+    .brand{font-weight:700;font-size:18px}
+    .role{font-size:12px;color:#6b7280}
+    .nav{display:flex;flex-direction:column;gap:6px}
+    .nav a{display:flex;align-items:center;gap:10px;padding:10px;border-radius:8px;color:#111}
+    .nav a:hover{background:#f3f4f6}
+    .nav a.active{background:#eef2ff;color:#3730a3}
+    .main{flex:1;display:flex;flex-direction:column}
+    .topbar{display:flex;justify-content:space-between;align-items:center;padding:18px 24px;background:#fff;border-bottom:1px solid #e6e9ef}
+    .welcome{display:flex;flex-direction:column}
+    .welcome .title{font-weight:600}
+    .controls{display:flex;align-items:center;gap:14px}
+    .notif{position:relative;padding:8px;border-radius:8px}
+    .avatar{display:flex;align-items:center;gap:10px}
+    .avatar .bubble{width:36px;height:36px;border-radius:50%;background:#e6eef8;display:flex;align-items:center;justify-content:center;font-weight:600}
+
+    /* ===== Content ===== */
+    .content{padding:22px}
+    .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+    .card{background:#fff;padding:16px;border-radius:10px;border:1px solid #eef2f7}
+    .muted{color:#6b7280;font-size:13px}
+    .big{font-size:28px;font-weight:700}
+
+    /* ===== Tables ===== */
+    table{width:100%;border-collapse:collapse}
+    th,td{padding:10px 12px;text-align:left;border-bottom:1px solid #f1f5f9}
+    thead th{font-size:13px;color:#374151;background:#fafafa}
+
+    /* ===== Students & search ===== */
+    .toolbar{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;gap:12px}
+    .search{display:flex;align-items:center;gap:8px}
+    .search input{padding:8px 10px;border-radius:8px;border:1px solid #e6e9ef}
+
+    /* ===== Attendance cards ===== */
+    .attendance-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+    .percent{font-weight:700;font-size:18px}
+
+    /* ===== Timetable ===== */
+    .timetable{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+    .timetable .day{font-weight:600;margin-bottom:8px}
+    .slot{background:#f8fafc;padding:8px;border-radius:6px;margin-bottom:6px;font-size:13px}
+
+    /* ===== Responsive ===== */
+    @media (max-width:980px){
+      .sidebar{display:none}
+      .grid{grid-template-columns:repeat(1,1fr)}
+      .attendance-cards,.timetable{grid-template-columns:repeat(1,1fr)}
+    }
+
+    /* ===== Small helpers ===== */
+    .small{font-size:13px;color:#6b7280}
+    .badge{display:inline-block;padding:4px 8px;border-radius:999px;font-size:12px;background:#eef2ff;color:#3730a3}
+    .table-wrap{overflow:auto;border-radius:8px;border:1px solid #eef2f7}
+
+    /* ===== Footer ===== */
+    .footer{padding:12px 22px;background:#fff;border-top:1px solid #e6e9ef;color:#6b7280;font-size:13px}
+  </style>
+</head>
+<body>
+  <div class="app">
+    <aside class="sidebar">
+      <div>
+        <div class="brand">JECRC ERP</div>
+        <div class="role">Administrator</div>
+      </div>
+
+      <nav class="nav" aria-label="Main navigation">
+        <a href="#" class="active">📊 Dashboard</a>
+        <a href="#students">👥 Students</a>
+        <a href="#attendance">🗂 Attendance</a>
+        <a href="#timetable">📅 Timetable</a>
+        <a href="#profile">👤 Profile</a>
+      </nav>
+
+      <div style="margin-top:auto">
+        <div class="small">Logged in as</div>
+        <div style="margin-top:6px;font-weight:600">Admin User</div>
+        <div class="small">admin@jecrc.edu</div>
+      </div>
+    </aside>
+
+    <main class="main">
+      <header class="topbar">
+        <div class="welcome">
+          <div class="title">Welcome, Admin User</div>
+          <div class="small">Overview</div>
+        </div>
+        <div class="controls">
+          <div class="notif" title="Notifications">🔔<span class="badge" style="position:relative;left:-8px;top:-10px">3</span></div>
+          <div class="avatar"><div class="bubble">A</div><div class="small">Admin User<br><span style="color:#9ca3af;font-size:12px">admin@jecrc.edu</span></div></div>
+        </div>
+      </header>
+
+      <section class="content">
+        <!-- Dashboard Overview -->
+        <div style="display:flex;gap:16px;align-items:flex-start;flex-wrap:wrap">
+          <div class="card" style="flex:1;min-width:220px;">
+            <div class="small">Total Students</div>
+            <div class="big">1200</div>
+            <div class="small">Active batches: 32</div>
+          </div>
+
+          <div class="card" style="flex:1;min-width:220px;">
+            <div class="small">Latest Attendance</div>
+            <div class="big">1030 / 1200</div>
+            <div class="small">86% average today</div>
+          </div>
+
+          <div class="card" style="flex:1;min-width:220px;">
+            <div class="small">Active Modules</div>
+            <div class="big">8</div>
+            <div class="small">Fees · Attendance · Exams · Timetable</div>
+          </div>
+        </div>
+
+        <!-- Recent attendance table -->
+        <div style="margin-top:18px">
+          <h3 style="margin:0 0 10px 0">Recent Attendance Records</h3>
+          <div class="table-wrap card">
+            <table>
+              <thead>
+                <tr><th>Date</th><th>Present</th><th>Total</th><th>Percent</th></tr>
+              </thead>
+              <tbody>
+                <tr><td>2025-09-17</td><td>1030</td><td>1200</td><td>85.8%</td></tr>
+                <tr><td>2025-09-16</td><td>1002</td><td>1200</td><td>83.5%</td></tr>
+                <tr><td>2025-09-15</td><td>990</td><td>1200</td><td>82.5%</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Students Section -->
+        <section id="students" style="margin-top:26px">
+          <div class="toolbar">
+            <h3 style="margin:0">Students</h3>
+            <div class="search">
+              <input placeholder="Search by name or ID" aria-label="Search students" />
+              <button style="padding:8px 12px;border-radius:8px;border:1px solid #e6e9ef;background:#fff">Add</button>
+            </div>
+          </div>
+
+          <div class="table-wrap card">
+            <table>
+              <thead>
+                <tr><th>ID</th><th>Name</th><th>Course</th><th>Semester</th><th>Email</th></tr>
+              </thead>
+              <tbody>
+                <tr><td>S101</td><td>Aman Sharma</td><td>B.Tech CSE</td><td>6</td><td>aman@example.com</td></tr>
+                <tr><td>S102</td><td>Priya Verma</td><td>B.Tech IT</td><td>4</td><td>priya@example.com</td></tr>
+                <tr><td>S103</td><td>Rohit Gupta</td><td>BBA</td><td>2</td><td>rohit@example.com</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <!-- Attendance Cards -->
+        <section id="attendance" style="margin-top:26px">
+          <h3 style="margin:0 0 10px 0">Attendance Summary</h3>
+          <div class="attendance-cards">
+            <div class="card">
+              <div class="muted">2025-09-17</div>
+              <div class="percent">1030 / 1200</div>
+              <div class="small">86%</div>
+            </div>
+            <div class="card">
+              <div class="muted">2025-09-16</div>
+              <div class="percent">1002 / 1200</div>
+              <div class="small">84%</div>
+            </div>
+            <div class="card">
+              <div class="muted">2025-09-15</div>
+              <div class="percent">990 / 1200</div>
+              <div class="small">83%</div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Timetable -->
+        <section id="timetable" style="margin-top:26px">
+          <h3 style="margin:0 0 10px 0">Timetable</h3>
+          <div class="timetable">
+            <div class="card">
+              <div class="day">Monday</div>
+              <div class="slot">9:00 - 10:00 — Data Structures</div>
+              <div class="slot">10:15 - 11:15 — DBMS</div>
+              <div class="slot">14:00 - 15:00 — Elective</div>
+            </div>
+            <div class="card">
+              <div class="day">Tuesday</div>
+              <div class="slot">9:00 - 10:00 — Computer Networks</div>
+              <div class="slot">11:30 - 12:30 — Operating Systems</div>
+            </div>
+            <div class="card">
+              <div class="day">Wednesday</div>
+              <div class="slot">9:00 - 10:00 — Mathematics</div>
+              <div class="slot">15:00 - 16:00 — Lab</div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Profile (static) -->
+        <section id="profile" style="margin-top:26px">
+          <h3 style="margin:0 0 10px 0">Profile</h3>
+          <div class="card" style="max-width:480px">
+            <div style="display:flex;gap:16px;align-items:center">
+              <div style="width:72px;height:72px;border-radius:12px;background:#eef2ff;display:flex;align-items:center;justify-content:center;font-size:28px;font-weight:700">A</div>
+              <div>
+                <div style="font-weight:700">Admin User</div>
+                <div class="small">admin@jecrc.edu</div>
+                <div class="small">Role: Administrator</div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+      </section>
+
+      <footer class="footer">JECRC ERP • Demo frontend — HTML + CSS only</footer>
+    </main>
+  </div>
+</body>
+</html>
