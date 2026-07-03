@@ -1,0 +1,150 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>JECRC ERP — Student Frontend (HTML + CSS)</title>
+  <style>
+    *{box-sizing:border-box}
+    html,body{height:100%;margin:0;font-family:Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial; color:#111}
+    a{color:inherit;text-decoration:none}
+    button{font:inherit}
+
+    .app{display:flex;min-height:100vh;background:#f5f7fb}
+    .sidebar{width:240px;background:#fff;border-right:1px solid #e6e9ef;padding:20px;display:flex;flex-direction:column;gap:18px}
+    .brand{font-weight:700;font-size:18px}
+    .role{font-size:12px;color:#6b7280}
+    .nav{display:flex;flex-direction:column;gap:6px}
+    .nav a{display:flex;align-items:center;gap:10px;padding:10px;border-radius:8px;color:#111}
+    .nav a:hover{background:#f3f4f6}
+    .nav a.active{background:#eef2ff;color:#3730a3}
+    .main{flex:1;display:flex;flex-direction:column}
+    .topbar{display:flex;justify-content:space-between;align-items:center;padding:18px 24px;background:#fff;border-bottom:1px solid #e6e9ef}
+    .welcome .title{font-weight:600}
+    .controls{display:flex;align-items:center;gap:14px}
+    .notif{position:relative;padding:8px;border-radius:8px}
+    .avatar{display:flex;align-items:center;gap:10px}
+    .avatar .bubble{width:36px;height:36px;border-radius:50%;background:#e6eef8;display:flex;align-items:center;justify-content:center;font-weight:600}
+
+    .content{padding:22px}
+    .grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}
+    .card{background:#fff;padding:16px;border-radius:10px;border:1px solid #eef2f7}
+    .muted{color:#6b7280;font-size:13px}
+    .big{font-size:22px;font-weight:700}
+
+    table{width:100%;border-collapse:collapse}
+    th,td{padding:10px 12px;text-align:left;border-bottom:1px solid #f1f5f9}
+    thead th{font-size:13px;color:#374151;background:#fafafa}
+
+    .timetable{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+    .timetable .day{font-weight:600;margin-bottom:8px}
+    .slot{background:#f8fafc;padding:8px;border-radius:6px;margin-bottom:6px;font-size:13px}
+
+    @media (max-width:768px){
+      .sidebar{display:none}
+      .grid,.timetable{grid-template-columns:repeat(1,1fr)}
+    }
+
+    .small{font-size:13px;color:#6b7280}
+    .footer{padding:12px 22px;background:#fff;border-top:1px solid #e6e9ef;color:#6b7280;font-size:13px}
+  </style>
+</head>
+<body>
+  <div class="app">
+    <aside class="sidebar">
+      <div>
+        <div class="brand">JECRC ERP</div>
+        <div class="role">Student</div>
+      </div>
+      <nav class="nav">
+        <a href="#" class="active">📊 Dashboard</a>
+        <a href="#attendance">🗂 My Attendance</a>
+        <a href="#timetable">📅 Timetable</a>
+        <a href="#profile">👤 My Profile</a>
+      </nav>
+    </aside>
+
+    <main class="main">
+      <header class="topbar">
+        <div class="welcome">
+          <div class="title">Welcome, Aman Sharma</div>
+          <div class="small">B.Tech CSE · Semester 6</div>
+        </div>
+        <div class="controls">
+          <div class="notif">🔔<span class="badge" style="position:relative;left:-8px;top:-10px">2</span></div>
+          <div class="avatar"><div class="bubble">A</div><div class="small">Aman Sharma<br><span style="color:#9ca3af;font-size:12px">aman@example.com</span></div></div>
+        </div>
+      </header>
+
+      <section class="content">
+        <!-- Student Dashboard -->
+        <div class="grid">
+          <div class="card">
+            <div class="muted">Overall Attendance</div>
+            <div class="big">86%</div>
+            <div class="small">Updated: 2025-09-17</div>
+          </div>
+          <div class="card">
+            <div class="muted">Upcoming Exam</div>
+            <div class="big">DBMS</div>
+            <div class="small">2025-09-25, 10:00 AM</div>
+          </div>
+        </div>
+
+        <!-- My Attendance -->
+        <section id="attendance" style="margin-top:26px">
+          <h3>My Attendance</h3>
+          <div class="card" style="overflow:auto">
+            <table>
+              <thead>
+                <tr><th>Subject</th><th>Attended</th><th>Total</th><th>Percent</th></tr>
+              </thead>
+              <tbody>
+                <tr><td>Data Structures</td><td>40</td><td>45</td><td>89%</td></tr>
+                <tr><td>DBMS</td><td>38</td><td>45</td><td>84%</td></tr>
+                <tr><td>Computer Networks</td><td>35</td><td>42</td><td>83%</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <!-- Timetable -->
+        <section id="timetable" style="margin-top:26px">
+          <h3>My Timetable</h3>
+          <div class="timetable">
+            <div class="card">
+              <div class="day">Monday</div>
+              <div class="slot">9:00 - DS</div>
+              <div class="slot">10:15 - DBMS</div>
+              <div class="slot">14:00 - Elective</div>
+            </div>
+            <div class="card">
+              <div class="day">Tuesday</div>
+              <div class="slot">9:00 - CN</div>
+              <div class="slot">11:30 - OS</div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Profile -->
+        <section id="profile" style="margin-top:26px">
+          <h3>My Profile</h3>
+          <div class="card" style="max-width:480px">
+            <div style="display:flex;gap:16px;align-items:center">
+              <div style="width:72px;height:72px;border-radius:50%;background:#eef2ff;display:flex;align-items:center;justify-content:center;font-size:28px;font-weight:700">A</div>
+              <div>
+                <div style="font-weight:700">Aman Sharma</div>
+                <div class="small">B.Tech CSE · Semester 6</div>
+                <div class="small">Email: aman@example.com</div>
+                <div class="small">Enrollment: S101</div>
+              </div>
+            </div>
+          </div>
+        </section>
+      </section>
+
+      <footer class="footer">JECRC ERP • Student Portal — HTML + CSS only</footer>
+    </main>
+  </div>
+</body>
+</html>
